@@ -22,7 +22,6 @@ document.addEventListener("click", e => {
   if (e.target.matches(".todo-checkbox")) {
     if (e.target.checked) {
       store()
-      localStorage.setItem("checked", JSON.stringify(arr));
       countCheckedTodo(uncheckedCountSpan)
     } else {
       store()
