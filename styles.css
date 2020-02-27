@@ -39,6 +39,7 @@ ul {
 
 .button {
   padding: 10px 20px;
+  margin: 10px;
 }
 
 .todo-list {
@@ -64,6 +65,27 @@ ul {
 
 .todo-checkbox {
   margin: 10px;
+}
+.todo-text{
+  position: relative;
+}
+@keyframes strike{
+  0%   { width : 0; }
+  100% { width: 100%; }
+}
+.todo-checkbox:checked + .todo-text:after{
+  content: ' ';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: black;
+  animation-name: strike;
+  animation-duration: 0.4s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards; 
 }
 
 .todo-container {
