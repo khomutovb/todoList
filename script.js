@@ -3,12 +3,12 @@ const classNames = {
   TODO_CHECKBOX: 'todo-checkbox',
   TODO_TEXT: 'todo-text',
   TODO_DELETE: 'todo-delete',
+  TODO_LABEL: 'toggle',
 }
 
 const list = document.getElementById('todo-list')
 const itemCountSpan = document.getElementById('item-count')
 const uncheckedCountSpan = document.getElementById('unchecked-count')
-
 
 document.addEventListener("click", e => {
   if (e.target.matches(".todo-delete")) {
@@ -49,9 +49,16 @@ function makeTodo(todoText) {
   addStyle(classNames.TODO_DELETE, buttonDelete);
   const checkbox = document.createElement("input");
   checkbox.setAttribute("type", "checkbox")
+  checkbox.setAttribute("id", "cbx-" + list.childNodes.length)
   addStyle(classNames.TODO_CHECKBOX, checkbox)
+  const label = document.createElement("label");
+  label.setAttribute("for", "cbx-" + list.childNodes.length)
+  addStyle(classNames.TODO_LABEL, label)
+  const spanButton = document.createElement("span");
   span.textContent = todoText
   render(checkbox, li)
+  render(label, li)
+  render(spanButton, label)
   render(span, li)
   render(buttonDelete, li)
   return li

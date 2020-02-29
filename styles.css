@@ -3,9 +3,12 @@
 }
 
 html, body {
-  background-color: #eee;
+  background: #AAFFA9;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #11FFBD, #AAFFA9);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #11FFBD, #AAFFA9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   margin: 0;
   padding: 0;
+  font-family: 'Roboto';
 }
 
 ul {
@@ -36,12 +39,68 @@ ul {
 .title, .controls, .button {
   flex: none;
 }
-
-.button {
-  padding: 10px 20px;
-  margin: 10px;
+.title{
+  font-family: 'Indie Flower';
 }
-
+.button {
+  margin: 10px;
+  background: #30ec72;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 40px;
+  color: #fff;
+  height: 40px;
+  font-size: 30px;
+  font-weight: 100;
+  box-shadow: 0 0 7px 0px rgba(48, 236, 114, 0.52);
+  cursor: pointer;
+}
+.toggle {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+.toggle:before {
+  content: "";
+  position: relative;
+  top: 3px;
+  left: 3px;
+  width: 34px;
+  height: 14px;
+  display: block;
+  background: #9A9999;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+.toggle span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  display: block;
+  background: #ff4646;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(154, 153, 153, 0.5);
+  transition: all 0.2s ease;
+}
+.toggle span:before {
+  content: "";
+  position: absolute;
+  display: block;
+  margin: -18px;
+  width: 56px;
+  height: 56px;
+  background: rgba(46, 220, 139, 0.5);
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 1;
+  pointer-events: none;
+}
 .todo-list {
   flex: 1 1 0;
   margin-top: 20px;
@@ -52,7 +111,6 @@ ul {
 .todo-delete {
   margin: 10px;
   background: transparent;
-  float: right;
   border: none;
   outline: none;
   height: 20px;
@@ -61,22 +119,41 @@ ul {
   background-repeat: no-repeat;
   cursor: pointer;
   background-size: cover;
+  margin-left: auto;
 }
 
 .todo-checkbox {
+  display: none;
   margin: 10px;
+}
+.todo-checkbox:checked + .toggle:before {
+  background: #bef5d1;
+}
+.todo-checkbox:checked + .toggle span {
+  background: #30ec72;
+  transform: translateX(20px);
+  transition: all 0.2s cubic-bezier(0.8, 0.4, 0.3, 1.25), background 0.15s ease;
+  box-shadow: 0 3px 8px rgba(46, 220, 113, 0.2);
+}
+.todo-checkbox:checked + .toggle span:before {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 .todo-text{
   position: relative;
+  margin-left: 10px;
+  max-width: 200px;
+  word-break: break-word;
 }
 @keyframes strike{
   0%   { width : 0; }
   100% { width: 100%; }
 }
-.todo-checkbox:checked + .todo-text:after{
+.todo-checkbox:checked ~ .todo-text:after{
   content: ' ';
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 0;
   width: 100%;
   height: 1px;
@@ -89,6 +166,7 @@ ul {
 }
 
 .todo-container {
+  display: flex;
   padding: 20px;
   border-bottom: 1px solid #333;
 }
